@@ -1,0 +1,33 @@
+{
+  "myJourney": [
+    "I'm a registered pharmacist in the Midwest who discovered the joy of textile crafts as a creative outlet from my professional life. What began as a simple hobby has blossomed into a passionate pursuit that brings me endless satisfaction.",
+    "As an empty nester, I now have more time to dive deeper into my craft projects. My evenings are filled with the gentle rhythm of stitching, often with my beloved yorkie Smokie curled up beside me as my faithful crafting companion. She's the best little supervisor a crafter could ask for!",
+    "Each project I create tells a story — from quiet Sunday afternoons perfecting embroidery techniques to experimenting with new patterns while Smokie keeps watch. Crafting has become my meditation and my joy, filling our peaceful home with handmade beauty.",
+    "Through this website and my work, I love sharing the projects that bring me happiness, hoping they might inspire others to discover their own creative path."
+  ],
+  "skills": [
+    { "name": "Hand Embroidery", "level": 90, "years": 8 },
+    { "name": "Knitting", "level": 85, "years": 5 },
+    { "name": "Quilting", "level": 75, "years": 3 },
+    { "name": "Cross Stitch", "level": 95, "years": 10 },
+    { "name": "Macrame", "level": 60, "years": 2 },
+    { "name": "Pattern Design", "level": 70, "years": 4 }
+  ],
+  "milestones": [
+    {
+      "year": "2024",
+      "title": "Launched CraftSyrph Website",
+      "description": "Created this platform to share my textile journey and connect with fellow crafters around the world."
+    },
+    {
+      "year": "2023",
+      "title": "Empty Nester Crafting Era",
+      "description": "With more time to dedicate to my passion, I expanded into new techniques and started my Etsy store."
+    },
+    {
+      "year": "2022",
+      "title": "Local Craft Fair Success",
+      "description": "Won second place at the Midwest Regional Craft Fair—Smokie was my lucky charm that day!"
+    }
+  ]
+}
