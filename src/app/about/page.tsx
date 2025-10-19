@@ -2,10 +2,23 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Heart, Scissors, Palette, Award, Users, Clock } from 'lucide-react';
 
+// Types for skills and milestones
+export type Skill = {
+  name: string;
+  level: number;
+  years: number;
+};
+
+export type Milestone = {
+  year: string;
+  title: string;
+  description: string;
+};
+
 // Trigger deployment for gh-pages branch
 const AboutPage = () => {
   // Static data for GitHub Pages (no API calls)
-  const skills = [
+  const skills: Skill[] = [
     { name: 'Hand Embroidery', level: 90, years: 8 },
     { name: 'Knitting', level: 85, years: 5 },
     { name: 'Quilting', level: 75, years: 3 },
@@ -14,7 +27,7 @@ const AboutPage = () => {
     { name: 'Pattern Design', level: 70, years: 4 }
   ];
 
-  const milestones = [
+  const milestones: Milestone[] = [
     {
       year: '2024',
       title: 'Launched CraftSyrph Website',
@@ -120,7 +133,7 @@ const AboutPage = () => {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Skills & Expertise</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skills.map((skill: any) => (
+            {skills.map((skill: Skill) => (
                 <div key={skill.name} className="bg-white rounded-lg shadow-md p-6">
                   <div className="flex justify-between items-center mb-3">
                     <h3 className="font-semibold text-gray-900">{skill.name}</h3>
@@ -143,7 +156,7 @@ const AboutPage = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">My Journey</h2>
           <div className="max-w-3xl mx-auto">
             <div className="space-y-8">
-              {milestones.map((milestone: any, index: number) => (
+              {milestones.map((milestone: Milestone, index: number) => (
                   <div key={milestone.year + index} className="flex gap-6">
                     <div className="flex-shrink-0">
                       <div className="w-4 h-4 bg-amber-600 rounded-full mt-1"></div>
