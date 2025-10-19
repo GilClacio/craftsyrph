@@ -209,11 +209,7 @@ const TimelineUpdateComponent = ({ update, index, onAddPhoto, onAddVideo, onRemo
   );
 };
 
-interface PageProps {
-  params: { id: string };
-}
-
-export default function Page({ params }: PageProps) {
+export default function Page({ params }: { params: { id: string } }) {
   const [activeTab, setActiveTab] = useState('overview');
   const [projectData, setProjectData] = useState(() => {
     // Mock project data - in a real app, this would be fetched based on params.id
