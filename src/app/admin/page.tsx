@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import ReactMarkdown from 'react-markdown';
 import { PencilIcon, TrashIcon, PlusIcon, StarIcon } from '@heroicons/react/24/outline';
 import ProjectEditor from '../../components/ProjectEditor';
 
@@ -52,6 +53,9 @@ interface Project {
 }
 
 const AdminDashboard = () => {
+  // About markdown state
+  const [aboutMarkdown, setAboutMarkdown] = useState('');
+  const [aboutLoading, setAboutLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loginData, setLoginData] = useState({ username: '', password: '' });
   const [showProjectEditor, setShowProjectEditor] = useState(false);
@@ -185,6 +189,12 @@ const AdminDashboard = () => {
       .then(data => { if (mounted) setSiteContent(data); })
       .catch(() => {})
       .finally(() => { if (mounted) setContentLoading(false); });
+    // Fetch About markdown
+    fetch('/content/about.md')
+      .then(res => res.text())
+      .then(md => { if (mounted) setAboutMarkdown(md); })
+      .catch(() => {})
+      .finally(() => { if (mounted) setAboutLoading(false); });
     return () => { mounted = false; };
   }, []);
 
@@ -470,11 +480,21 @@ const AdminDashboard = () => {
             <h2 className="text-lg font-bold text-gray-800">Edit About Page</h2>
             <p className="text-sm text-gray-600">Edit the &apos;My Journey&apos; paragraphs and Skills & Expertise</p>
           </div>
-
           <div className="p-6 space-y-6">
-            {/* My Journey editor */}
+            {/* Show current About markdown from Netlify CMS */}
             <div>
-              <h3 className="font-semibold text-gray-800 mb-2">My Journey</h3>
+              <h3 className="font-semibold text-gray-800 mb-2">Current About Page Content</h3>
+              {aboutLoading ? (
+                <p className="text-gray-500">Loading...</p>
+              ) : (
+                <div className="prose">
+                  <ReactMarkdown>{aboutMarkdown}</ReactMarkdown>
+                </div>
+              )}
+            </div>
+            {/* My Journey editor (existing custom content) */}
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">My Journey (Custom)</h3>
               {contentLoading ? (
                 <p className="text-gray-500">Loading...</p>
               ) : (

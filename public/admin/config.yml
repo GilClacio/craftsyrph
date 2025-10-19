@@ -1,0 +1,36 @@
+backend:
+  name: github
+  repo: GilClacio/craftsyrph
+  branch: main
+  site_domain: craftsyrph.com
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Images", name: "images", widget: "image", multiple: true, required: false }
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Materials", name: "materials", widget: "list", required: false }
+      - { label: "Progress", name: "progress", widget: "text", required: false }
+      - { label: "Images", name: "images", widget: "image", multiple: true, required: false }
+  - name: "about"
+    label: "About Page"
+    file: "content/about.md"
+    fields:
+      - { label: "My Journey", name: "body", widget: "markdown" }
