@@ -4,13 +4,7 @@ import Link from 'next/link';
 import { ArrowLeftIcon, CalendarIcon, ClockIcon, TagIcon, ShareIcon } from '@heroicons/react/24/outline';
 import { formatDistanceToNow } from 'date-fns';
 
-interface BlogPostPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-const BlogPostPage = ({ params }: BlogPostPageProps) => {
+export default function Page({ params }: { params: { slug: string } }) {
   // Mock blog post data - in a real app, this would be fetched based on params.slug
   console.log('Blog post slug:', params.slug);
   const post = {
@@ -278,6 +272,4 @@ Happy stitching! 🧵✨
       </div>
     </div>
   );
-};
-
-export default BlogPostPage;
+}
