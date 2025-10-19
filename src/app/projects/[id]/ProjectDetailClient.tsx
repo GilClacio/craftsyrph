@@ -331,7 +331,7 @@ export default function ProjectDetailClient({ params }: { params: { id: string }
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 py-8">
       <div className="max-w-6xl mx-auto px-4">
         <div className="mb-8">
-          <Link href="/projects" className="inline-flex items-center gap-2 text-amber-700 hover:text-orange-700 font-medium">
+          <Link href="/craftsyrph/projects/" className="inline-flex items-center gap-2 text-amber-700 hover:text-orange-700 font-medium">
             <ArrowLeftIcon className="h-5 w-5" />
             Back to Projects
           </Link>

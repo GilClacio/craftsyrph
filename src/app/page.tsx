@@ -35,7 +35,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-4 text-center">
           <div className="flex justify-center mb-6">
             <Image
-              src="/logo.jpg"
+              src="/craftsyrph/logo.jpg"
               alt="CraftsyRPh Logo"
               width={80}
               height={80}
@@ -51,7 +51,7 @@ export default function Home() {
           </p>
           <div className="flex justify-center gap-4">
             <Link
-              href="/projects"
+              href="/craftsyrph/projects/"
               className="bg-amber-700 text-white px-8 py-3 rounded-lg hover:bg-amber-800 transition-colors font-medium flex items-center justify-center"
             >
               View Projects
