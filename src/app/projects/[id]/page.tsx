@@ -209,79 +209,83 @@ const TimelineUpdateComponent = ({ update, index, onAddPhoto, onAddVideo, onRemo
   );
 };
 
-const ProjectDetailPage = ({ params }: ProjectDetailPageProps) => {
+interface PageProps {
+  params: { id: string };
+}
+
+export default function Page({ params }: PageProps) {
   const [activeTab, setActiveTab] = useState('overview');
   const [projectData, setProjectData] = useState(() => {
     // Mock project data - in a real app, this would be fetched based on params.id
     return {
-    id: parseInt(params.id),
-    title: "Vintage Embroidered Blouse",
-    description: "A delicate hand-embroidered blouse with floral patterns inspired by vintage designs from the 1920s. This piece combines traditional techniques with contemporary styling.",
-    status: "completed",
-    category: "embroidery",
-    difficulty: "intermediate",
-    startDate: "2024-09-15",
-    completionDate: "2024-10-01",
-    estimatedHours: 25,
-    actualHours: 28,
-    etsyLink: "https://etsy.com/shop/craftsyrph/item1",
-    images: [
-      "/api/placeholder/600/400",
-      "/api/placeholder/600/400",
-      "/api/placeholder/600/400"
-    ],
-    videos: [
-      { title: "Embroidery Technique Demo", url: "https://youtube.com/watch?v=example" }
-    ],
-    materials: [
-      { name: "Cotton fabric", quantity: "1 yard", cost: 15.00, supplier: "Local fabric store" },
-      { name: "DMC Embroidery floss", quantity: "12 skeins", cost: 18.00, supplier: "Michaels" },
-      { name: "Pearl buttons", quantity: "8 pieces", cost: 6.50, supplier: "Etsy" },
-      { name: "Interfacing", quantity: "0.5 yard", cost: 4.00, supplier: "Joann Fabrics" }
-    ],
-    equipment: [
-      { name: "Embroidery hoops", description: "Various sizes (4\", 6\", 8\")" },
-      { name: "Embroidery needles", description: "Size 22-26" },
-      { name: "Fabric scissors", description: "Sharp cutting scissors" },
-      { name: "Seam ripper", description: "For corrections" }
-    ],
-    techniques: [
-      "French knots",
-      "Satin stitch",
-      "Chain stitch",
-      "Lazy daisy",
-      "Blanket stitch"
-    ],
-    updates: [
-      {
-        date: "2024-10-01",
-        title: "Project Completed!",
-        content: "Finished the final touches and added to Etsy store. Very happy with how the floral pattern turned out.",
-        photos: ["/api/placeholder/300/200", "/api/placeholder/300/200"],
-        videos: []
-      },
-      {
-        date: "2024-09-28",
-        title: "Nearing Completion",
-        content: "Almost done with the embroidery work. Just need to finish the collar details and attach buttons.",
-        photos: ["/api/placeholder/300/200"],
-        videos: []
-      },
-      {
-        date: "2024-09-22",
-        title: "Progress Update",
-        content: "Completed the main floral motif on the front panel. Moving on to the sleeve details next.",
-        photos: ["/api/placeholder/300/200", "/api/placeholder/300/200"],
-        videos: [{ title: "Embroidery technique demo", url: "https://youtube.com/watch?v=example" }]
-      },
-      {
-        date: "2024-09-15",
-        title: "Project Started",
-        content: "Cut the fabric pieces and transferred the embroidery pattern. Excited to begin stitching!",
-        photos: ["/api/placeholder/300/200"],
-        videos: []
-      }
-    ]
+      id: parseInt(params.id),
+      title: "Vintage Embroidered Blouse",
+      description: "A delicate hand-embroidered blouse with floral patterns inspired by vintage designs from the 1920s. This piece combines traditional techniques with contemporary styling.",
+      status: "completed",
+      category: "embroidery",
+      difficulty: "intermediate",
+      startDate: "2024-09-15",
+      completionDate: "2024-10-01",
+      estimatedHours: 25,
+      actualHours: 28,
+      etsyLink: "https://etsy.com/shop/craftsyrph/item1",
+      images: [
+        "/api/placeholder/600/400",
+        "/api/placeholder/600/400",
+        "/api/placeholder/600/400"
+      ],
+      videos: [
+        { title: "Embroidery Technique Demo", url: "https://youtube.com/watch?v=example" }
+      ],
+      materials: [
+        { name: "Cotton fabric", quantity: "1 yard", cost: 15.00, supplier: "Local fabric store" },
+        { name: "DMC Embroidery floss", quantity: "12 skeins", cost: 18.00, supplier: "Michaels" },
+        { name: "Pearl buttons", quantity: "8 pieces", cost: 6.50, supplier: "Etsy" },
+        { name: "Interfacing", quantity: "0.5 yard", cost: 4.00, supplier: "Joann Fabrics" }
+      ],
+      equipment: [
+        { name: "Embroidery hoops", description: "Various sizes (4\", 6\", 8\")" },
+        { name: "Embroidery needles", description: "Size 22-26" },
+        { name: "Fabric scissors", description: "Sharp cutting scissors" },
+        { name: "Seam ripper", description: "For corrections" }
+      ],
+      techniques: [
+        "French knots",
+        "Satin stitch",
+        "Chain stitch",
+        "Lazy daisy",
+        "Blanket stitch"
+      ],
+      updates: [
+        {
+          date: "2024-10-01",
+          title: "Project Completed!",
+          content: "Finished the final touches and added to Etsy store. Very happy with how the floral pattern turned out.",
+          photos: ["/api/placeholder/300/200", "/api/placeholder/300/200"],
+          videos: []
+        },
+        {
+          date: "2024-09-28",
+          title: "Nearing Completion",
+          content: "Almost done with the embroidery work. Just need to finish the collar details and attach buttons.",
+          photos: ["/api/placeholder/300/200"],
+          videos: []
+        },
+        {
+          date: "2024-09-22",
+          title: "Progress Update",
+          content: "Completed the main floral motif on the front panel. Moving on to the sleeve details next.",
+          photos: ["/api/placeholder/300/200", "/api/placeholder/300/200"],
+          videos: [{ title: "Embroidery technique demo", url: "https://youtube.com/watch?v=example" }]
+        },
+        {
+          date: "2024-09-15",
+          title: "Project Started",
+          content: "Cut the fabric pieces and transferred the embroidery pattern. Excited to begin stitching!",
+          photos: ["/api/placeholder/300/200"],
+          videos: []
+        }
+      ]
     };
   });
 
@@ -587,5 +591,3 @@ const ProjectDetailPage = ({ params }: ProjectDetailPageProps) => {
     </div>
   );
 };
-
-export default ProjectDetailPage;
