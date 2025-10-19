@@ -184,7 +184,7 @@ const AdminDashboard = () => {
   // Load site content
   useEffect(() => {
     let mounted = true;
-    fetch('/api/site-content')
+    fetch('/data/siteContent.json')
       .then(r => r.json())
       .then(data => { if (mounted) setSiteContent(data); })
       .catch(() => {})
@@ -198,22 +198,7 @@ const AdminDashboard = () => {
     return () => { mounted = false; };
   }, []);
 
-  const saveSiteContent = async () => {
-    if (!siteContent) return;
-    setSavingContent(true);
-    try {
-      const res = await fetch('/api/site-content', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(siteContent)
-      });
-      const json = await res.json();
-      if (!json.success) alert('Failed to save content');
-      else alert('Content saved');
-    } catch {
-      alert('Error saving content');
-    } finally { setSavingContent(false); }
-  };
+  // Removed saveSiteContent: Netlify CMS will handle content updates via Git Gateway
 
   const deleteProject = (id: number) => {
     if (confirm('Are you sure you want to delete this project?')) {
@@ -760,18 +745,14 @@ const AdminDashboard = () => {
             </div>
 
             <div className="flex gap-3">
-              <button
-                onClick={saveSiteContent}
-                disabled={savingContent}
-                className="bg-amber-700 text-white px-4 py-2 rounded-md hover:bg-amber-800"
-              >
-                {savingContent ? 'Saving...' : 'Save About Content'}
-              </button>
+              <div className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-md font-medium">
+                Saving is now handled by Netlify CMS (Git Gateway). Use the admin panel at <a href="/admin" className="underline text-amber-700">/admin</a> to edit and save content.
+              </div>
               <button
                 onClick={() => {
-                  // reload content from server
+                  // reload content from static JSON file
                   setContentLoading(true);
-                  fetch('/api/site-content').then(r => r.json()).then(data => setSiteContent(data)).finally(() => setContentLoading(false));
+                  fetch('/data/siteContent.json').then(r => r.json()).then(data => setSiteContent(data)).finally(() => setContentLoading(false));
                 }}
                 className="px-4 py-2 rounded-md border border-gray-300"
               >
