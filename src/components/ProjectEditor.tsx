@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { XMarkIcon, PlusIcon, TrashIcon, ClockIcon, PhotoIcon, VideoCameraIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon, PlusIcon, TrashIcon, PhotoIcon } from '@heroicons/react/24/outline';
 
 interface Project {
   id: number;
@@ -191,7 +191,7 @@ const ProjectEditor = ({ project, categories = [], onSave, onCancel }: ProjectEd
     }));
   };
 
-  const updateProgressUpdate = (index: number, field: string, value: any) => {
+  const updateProgressUpdate = (index: number, field: string, value: unknown) => {
     setFormData(prev => ({
       ...prev,
       updates: prev.updates.map((update, i) => 
@@ -343,7 +343,7 @@ const ProjectEditor = ({ project, categories = [], onSave, onCancel }: ProjectEd
                     </label>
                     <select
                       value={formData.status}
-                      onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as any }))}
+                      onChange={(e) => setFormData(prev => ({ ...prev, status: e.target.value as "planning" | "in-progress" | "completed" }))}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 text-gray-800"
                     >
                       <option value="planning">Planning</option>
@@ -468,9 +468,9 @@ const ProjectEditor = ({ project, categories = [], onSave, onCancel }: ProjectEd
 
                       {formData.isSold && (
                         <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                          <p className="text-sm text-green-800">
-                            🎉 This item has been marked as sold! The Etsy link will show "SOLD" status to visitors.
-                          </p>
+                            <p className="text-sm text-green-800">
+                              🎉 This item has been marked as sold! The Etsy link will show &quot;SOLD&quot; status to visitors.
+                            </p>
                         </div>
                       )}
                     </div>

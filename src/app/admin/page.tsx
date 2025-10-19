@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { EyeIcon, EyeSlashIcon, PencilIcon, TrashIcon, PlusIcon, StarIcon } from '@heroicons/react/24/outline';
+import { PencilIcon, TrashIcon, PlusIcon, StarIcon } from '@heroicons/react/24/outline';
 import ProjectEditor from '../../components/ProjectEditor';
 
 // Type definitions
@@ -200,7 +200,7 @@ const AdminDashboard = () => {
       const json = await res.json();
       if (!json.success) alert('Failed to save content');
       else alert('Content saved');
-    } catch (err) {
+    } catch {
       alert('Error saving content');
     } finally { setSavingContent(false); }
   };
@@ -468,7 +468,7 @@ const AdminDashboard = () => {
         <div className="bg-white rounded-lg shadow mb-8">
           <div className="p-6 border-b border-gray-200">
             <h2 className="text-lg font-bold text-gray-800">Edit About Page</h2>
-            <p className="text-sm text-gray-600">Edit the 'My Journey' paragraphs and Skills & Expertise</p>
+            <p className="text-sm text-gray-600">Edit the &apos;My Journey&apos; paragraphs and Skills & Expertise</p>
           </div>
 
           <div className="p-6 space-y-6">
