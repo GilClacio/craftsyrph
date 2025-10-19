@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Heart, Scissors, Palette, Award, Users, Clock } from 'lucide-react';
 
+// Trigger deployment for gh-pages branch
 const AboutPage = () => {
   // Static data for GitHub Pages (no API calls)
   const skills = [
