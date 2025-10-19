@@ -1,0 +1,11 @@
+# Netlify configuration for Next.js API routes and SSR
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+# Optional: Set environment variables for Node.js compatibility
+[environment]
+  NODE_VERSION = "18"
