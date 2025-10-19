@@ -1,29 +1,42 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import { Heart, Scissors, Palette, Award, Users, Clock } from 'lucide-react';
-import { useEffect, useState } from 'react';
 
 const AboutPage = () => {
-  const [content, setContent] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
+  // Static data for GitHub Pages (no API calls)
+  const skills = [
+    { name: 'Hand Embroidery', level: 90, years: 8 },
+    { name: 'Knitting', level: 85, years: 5 },
+    { name: 'Quilting', level: 75, years: 3 },
+    { name: 'Cross Stitch', level: 95, years: 10 },
+    { name: 'Macrame', level: 60, years: 2 },
+    { name: 'Pattern Design', level: 70, years: 4 }
+  ];
 
-  useEffect(() => {
-    let mounted = true;
-    fetch('/api/site-content')
-      .then((r) => r.json())
-      .then((data) => {
-        if (mounted) setContent(data);
-      })
-      .catch(() => {})
-      .finally(() => mounted && setLoading(false));
-    return () => { mounted = false; };
-  }, []);
+  const milestones = [
+    {
+      year: '2024',
+      title: 'Launched CraftSyrph Website',
+      description: 'Created this platform to share my textile journey and connect with fellow crafters around the world.'
+    },
+    {
+      year: '2023',
+      title: 'Empty Nester Crafting Era',
+      description: 'With more time to dedicate to my passion, I expanded into new techniques and started my Etsy store.'
+    },
+    {
+      year: '2022',
+      title: 'Local Craft Fair Success',
+      description: 'Won second place at the Midwest Regional Craft Fair—Smokie was my lucky charm that day!'
+    }
+  ];
 
-  const skills = content?.skills || [];
-  const milestones = content?.milestones || [];
-  const myJourney = content?.myJourney || [];
+  const myJourney = [
+    "I'm a registered pharmacist in the Midwest who discovered the joy of textile crafts as a creative outlet from my professional life. What began as a simple hobby has blossomed into a passionate pursuit that brings me endless satisfaction.",
+    "As an empty nester, I now have more time to dive deeper into my craft projects. My evenings are filled with the gentle rhythm of stitching, often with my beloved yorkie Smokie curled up beside me as my faithful crafting companion. She's the best little supervisor a crafter could ask for!",
+    "Each project I create tells a story—from quiet Sunday afternoons perfecting embroidery techniques to experimenting with new patterns while Smokie keeps watch. Crafting has become my meditation and my joy, filling our peaceful home with handmade beauty.",
+    "Through this website and my work, I love sharing the projects that bring me happiness, hoping they might inspire others to discover their own creative path."
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 py-8">
@@ -92,13 +105,9 @@ const AboutPage = () => {
           <div>
             <h2 className="text-3xl font-bold text-gray-900 mb-6">My Journey</h2>
               <div className="space-y-4 text-gray-600">
-                {loading ? (
-                  <p className="text-gray-500">Loading story...</p>
-                ) : (
-                  myJourney.map((para: string, i: number) => (
-                    <p key={i}>{para}</p>
-                  ))
-                )}
+                {myJourney.map((para: string, i: number) => (
+                  <p key={i}>{para}</p>
+                ))}
               </div>
           </div>
           <div className="bg-gray-200 aspect-[4/3] rounded-lg flex items-center justify-center">
@@ -110,10 +119,7 @@ const AboutPage = () => {
         <section className="mb-16">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Skills & Expertise</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {loading ? (
-              <div className="text-center text-gray-500">Loading skills...</div>
-            ) : (
-              skills.map((skill: any) => (
+            {skills.map((skill: any) => (
                 <div key={skill.name} className="bg-white rounded-lg shadow-md p-6">
                   <div className="flex justify-between items-center mb-3">
                     <h3 className="font-semibold text-gray-900">{skill.name}</h3>
@@ -127,8 +133,7 @@ const AboutPage = () => {
                   </div>
                   <p className="text-sm text-gray-600">{skill.level}% proficiency</p>
                 </div>
-              ))
-            )}
+              ))}
           </div>
         </section>
 
@@ -137,10 +142,7 @@ const AboutPage = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">My Journey</h2>
           <div className="max-w-3xl mx-auto">
             <div className="space-y-8">
-              {loading ? (
-                <div className="text-gray-500 text-center">Loading timeline...</div>
-              ) : (
-                milestones.map((milestone: any, index: number) => (
+              {milestones.map((milestone: any, index: number) => (
                   <div key={milestone.year + index} className="flex gap-6">
                     <div className="flex-shrink-0">
                       <div className="w-4 h-4 bg-amber-600 rounded-full mt-1"></div>
@@ -156,8 +158,7 @@ const AboutPage = () => {
                       <p className="text-gray-600">{milestone.description}</p>
                     </div>
                   </div>
-                ))
-              )}
+                ))}
             </div>
           </div>
         </section>
