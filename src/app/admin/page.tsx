@@ -4,6 +4,23 @@ import { useEffect, useState } from 'react';
 import { EyeIcon, EyeSlashIcon, PencilIcon, TrashIcon, PlusIcon, StarIcon } from '@heroicons/react/24/outline';
 import ProjectEditor from '../../components/ProjectEditor';
 
+// Type definitions
+export type Skill = {
+  name: string;
+  level: number;
+  years: number;
+};
+export type Milestone = {
+  year: string;
+  title: string;
+  description: string;
+};
+export type SiteContent = {
+  myJourney: string[];
+  skills: Skill[];
+  milestones: Milestone[];
+};
+
 interface Project {
   id: number;
   title: string;
@@ -150,7 +167,7 @@ const AdminDashboard = () => {
   };
 
   // Site content state for About page
-  const [siteContent, setSiteContent] = useState<any>(null);
+  const [siteContent, setSiteContent] = useState<SiteContent | null>(null);
   const [contentLoading, setContentLoading] = useState(true);
   const [savingContent, setSavingContent] = useState(false);
 
@@ -466,7 +483,8 @@ const AdminDashboard = () => {
                     <div key={idx} className="flex gap-3">
                       <textarea
                         value={para}
-                        onChange={(e) => setSiteContent((prev: any) => {
+                        onChange={(e) => setSiteContent((prev: SiteContent | null) => {
+                          if (!prev) return prev;
                           const next = { ...prev };
                           next.myJourney = [...(next.myJourney || [])];
                           next.myJourney[idx] = e.target.value;
@@ -476,7 +494,15 @@ const AdminDashboard = () => {
                         rows={3}
                       />
                       <button
-                        onClick={() => setSiteContent((prev: any) => ({ ...prev, myJourney: prev.myJourney.filter((_: any, i: number) => i !== idx) }))}
+                        onClick={() => setSiteContent(prev => {
+                          if (!prev) return prev;
+                          return {
+                            ...prev,
+                            myJourney: prev.myJourney.filter((_, i) => i !== idx),
+                            skills: prev.skills,
+                            milestones: prev.milestones,
+                          };
+                        })}
                         className="text-red-600 hover:text-red-700"
                         title="Delete paragraph"
                       >
@@ -485,7 +511,15 @@ const AdminDashboard = () => {
                     </div>
                   ))}
                   <button
-                    onClick={() => setSiteContent((prev: any) => ({ ...prev, myJourney: [...(prev.myJourney || []), ''] }))}
+                    onClick={() => setSiteContent(prev => {
+                      if (!prev) return prev;
+                      return {
+                        ...prev,
+                        myJourney: [...prev.myJourney, ''],
+                        skills: prev.skills,
+                        milestones: prev.milestones,
+                      };
+                    })}
                     className="mt-2 bg-amber-700 text-white px-3 py-1 rounded-md hover:bg-amber-800"
                   >
                     Add Paragraph
@@ -501,11 +535,12 @@ const AdminDashboard = () => {
                 <p className="text-gray-500">Loading...</p>
               ) : (
                 <div className="space-y-3">
-                  {(siteContent?.skills || []).map((skill: any, idx: number) => (
+                  {(siteContent?.skills || []).map((skill: Skill, idx: number) => (
                     <div key={idx} className="flex gap-3 items-center">
                       <input
                         value={skill.name}
-                        onChange={(e) => setSiteContent((prev: any) => {
+                        onChange={(e) => setSiteContent((prev: SiteContent | null) => {
+                          if (!prev) return prev;
                           const next = { ...prev };
                           next.skills = [...(next.skills || [])];
                           next.skills[idx] = { ...next.skills[idx], name: e.target.value };
@@ -516,7 +551,8 @@ const AdminDashboard = () => {
                       <input
                         type="number"
                         value={skill.level}
-                        onChange={(e) => setSiteContent((prev: any) => {
+                        onChange={(e) => setSiteContent((prev: SiteContent | null) => {
+                          if (!prev) return prev;
                           const next = { ...prev };
                           next.skills = [...(next.skills || [])];
                           next.skills[idx] = { ...next.skills[idx], level: parseInt(e.target.value) || 0 };
@@ -527,7 +563,8 @@ const AdminDashboard = () => {
                       <input
                         type="number"
                         value={skill.years}
-                        onChange={(e) => setSiteContent((prev: any) => {
+                        onChange={(e) => setSiteContent((prev: SiteContent | null) => {
+                          if (!prev) return prev;
                           const next = { ...prev };
                           next.skills = [...(next.skills || [])];
                           next.skills[idx] = { ...next.skills[idx], years: parseInt(e.target.value) || 0 };
@@ -537,7 +574,15 @@ const AdminDashboard = () => {
                       />
                       <div className="flex gap-1 ml-auto">
                         <button
-                          onClick={() => setSiteContent((prev: any) => ({ ...prev, skills: prev.skills.filter((_: any, i: number) => i !== idx) }))}
+                          onClick={() => setSiteContent(prev => {
+                            if (!prev) return prev;
+                            return {
+                              ...prev,
+                              skills: prev.skills.filter((_, i) => i !== idx),
+                              myJourney: prev.myJourney,
+                              milestones: prev.milestones,
+                            };
+                          })}
                           className="text-red-600 hover:text-red-700"
                         >
                           Delete
@@ -547,7 +592,15 @@ const AdminDashboard = () => {
                   ))}
 
                   <button
-                    onClick={() => setSiteContent((prev: any) => ({ ...prev, skills: [...(prev.skills || []), { name: 'New Skill', level: 50, years: 0 }] }))}
+                    onClick={() => setSiteContent(prev => {
+                      if (!prev) return prev;
+                      return {
+                        ...prev,
+                        skills: [...prev.skills, { name: 'New Skill', level: 50, years: 0 }],
+                        myJourney: prev.myJourney,
+                        milestones: prev.milestones,
+                      };
+                    })}
                     className="mt-2 bg-amber-700 text-white px-3 py-1 rounded-md hover:bg-amber-800"
                   >
                     Add Skill
@@ -563,14 +616,15 @@ const AdminDashboard = () => {
                 <p className="text-gray-500">Loading...</p>
               ) : (
                 <div className="space-y-4">
-                  {(siteContent?.milestones || []).map((milestone: any, idx: number) => (
+                  {(siteContent?.milestones || []).map((milestone: Milestone, idx: number) => (
                     <div key={idx} className="border border-gray-200 rounded-lg p-4">
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">Year</label>
                           <input
                             value={milestone.year}
-                            onChange={(e) => setSiteContent((prev: any) => {
+                            onChange={(e) => setSiteContent((prev: SiteContent | null) => {
+                              if (!prev) return prev;
                               const next = { ...prev };
                               next.milestones = [...(next.milestones || [])];
                               next.milestones[idx] = { ...next.milestones[idx], year: e.target.value };
@@ -584,7 +638,8 @@ const AdminDashboard = () => {
                           <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
                           <input
                             value={milestone.title}
-                            onChange={(e) => setSiteContent((prev: any) => {
+                            onChange={(e) => setSiteContent((prev: SiteContent | null) => {
+                              if (!prev) return prev;
                               const next = { ...prev };
                               next.milestones = [...(next.milestones || [])];
                               next.milestones[idx] = { ...next.milestones[idx], title: e.target.value };
@@ -599,7 +654,8 @@ const AdminDashboard = () => {
                         <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
                         <textarea
                           value={milestone.description}
-                          onChange={(e) => setSiteContent((prev: any) => {
+                          onChange={(e) => setSiteContent((prev: SiteContent | null) => {
+                            if (!prev) return prev;
                             const next = { ...prev };
                             next.milestones = [...(next.milestones || [])];
                             next.milestones[idx] = { ...next.milestones[idx], description: e.target.value };
@@ -612,7 +668,8 @@ const AdminDashboard = () => {
                       </div>
                       <div className="flex justify-end gap-2">
                         <button
-                          onClick={() => setSiteContent((prev: any) => {
+                          onClick={() => setSiteContent((prev: SiteContent | null) => {
+                            if (!prev) return prev;
                             const newMilestones = [...(prev.milestones || [])];
                             if (idx > 0) {
                               [newMilestones[idx], newMilestones[idx - 1]] = [newMilestones[idx - 1], newMilestones[idx]];
@@ -625,7 +682,8 @@ const AdminDashboard = () => {
                           Move Up
                         </button>
                         <button
-                          onClick={() => setSiteContent((prev: any) => {
+                          onClick={() => setSiteContent((prev: SiteContent | null) => {
+                            if (!prev) return prev;
                             const newMilestones = [...(prev.milestones || [])];
                             if (idx < newMilestones.length - 1) {
                               [newMilestones[idx], newMilestones[idx + 1]] = [newMilestones[idx + 1], newMilestones[idx]];
@@ -638,7 +696,15 @@ const AdminDashboard = () => {
                           Move Down
                         </button>
                         <button
-                          onClick={() => setSiteContent((prev: any) => ({ ...prev, milestones: prev.milestones.filter((_: any, i: number) => i !== idx) }))}
+                          onClick={() => setSiteContent(prev => {
+                            if (!prev) return prev;
+                            return {
+                              ...prev,
+                              milestones: prev.milestones.filter((_, i) => i !== idx),
+                              myJourney: prev.myJourney,
+                              skills: prev.skills,
+                            };
+                          })}
                           className="px-3 py-1 text-sm text-red-600 border border-red-300 rounded-md hover:bg-red-50"
                         >
                           Delete
@@ -648,17 +714,22 @@ const AdminDashboard = () => {
                   ))}
 
                   <button
-                    onClick={() => setSiteContent((prev: any) => ({ 
-                      ...prev, 
-                      milestones: [
-                        ...(prev.milestones || []), 
-                        { 
-                          year: new Date().getFullYear().toString(), 
-                          title: 'New Milestone', 
-                          description: 'Add description here...' 
-                        }
-                      ]
-                    }))}
+                    onClick={() => setSiteContent(prev => {
+                      if (!prev) return prev;
+                      return {
+                        ...prev,
+                        milestones: [
+                          ...prev.milestones,
+                          {
+                            year: new Date().getFullYear().toString(),
+                            title: 'New Milestone',
+                            description: 'Add description here...'
+                          }
+                        ],
+                        myJourney: prev.myJourney,
+                        skills: prev.skills,
+                      };
+                    })}
                     className="mt-2 bg-amber-700 text-white px-4 py-2 rounded-md hover:bg-amber-800 flex items-center gap-2"
                   >
                     <PlusIcon className="h-4 w-4" />
