@@ -8,12 +8,11 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const basePath = '/craftsyrph';
   const navigation = [
-    { name: 'Home', href: `${basePath}/` },
-    { name: 'Projects', href: `${basePath}/projects/` },
-    { name: 'About', href: `${basePath}/about/` },
-    { name: 'Contact', href: `${basePath}/contact/` },
+    { name: 'Home', href: '/' },
+    { name: 'Projects', href: '/projects' },
+    { name: 'About', href: '/about' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -21,9 +20,9 @@ const Navigation = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/craftsyrph/" className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3">
             <Image
-              src="/craftsyrph/logo.jpg"
+              src="/logo.jpg"
               alt="CraftsyRPh Logo"
               width={40}
               height={40}

@@ -5,8 +5,6 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
-  assetPrefix: '/craftsyrph/',
-  basePath: '/craftsyrph',
 };
 
 module.exports = nextConfig;

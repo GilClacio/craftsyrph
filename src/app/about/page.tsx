@@ -59,7 +59,7 @@ const AboutPage = () => {
         <section className="text-center mb-16">
           <div className="flex justify-center mb-8">
             <Image
-              src="/craftsyrph/logo.jpg"
+              src="/logo.jpg"
               alt="CraftsyRPh Logo"
               width={128}
               height={128}
@@ -76,13 +76,13 @@ const AboutPage = () => {
           </p>
           <div className="flex justify-center gap-4">
             <Link
-              href="/craftsyrph/projects/"
+              href="/projects"
               className="bg-amber-700 text-white px-6 py-3 rounded-lg hover:bg-amber-800 transition-colors font-medium"
             >
               View My Work
             </Link>
             <Link
-              href="/craftsyrph/contact/"
+              href="/contact"
               className="border-2 border-amber-700 text-amber-700 px-6 py-3 rounded-lg hover:bg-amber-50 transition-colors font-medium"
             >
               Get In Touch
